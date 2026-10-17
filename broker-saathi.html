@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Broker Saathi</title>
+<style>
+:root{--bg:#f4f5f8;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e5e8ef;--acc:#3151e0;--accb:#e9edff;--wa:#15803d;--wab:#e2f5e9;--inp:#f4f5f8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a26;--ink:#eef2f8;--mut:#93a0b5;--line:#232c3d;--acc:#7b93ff;--accb:#1d2646;--wa:#4ade80;--wab:#12301f;--inp:#0f1520;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a26;--ink:#eef2f8;--mut:#93a0b5;--line:#232c3d;--acc:#7b93ff;--accb:#1d2646;--wa:#4ade80;--wab:#12301f;--inp:#0f1520;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.w{max-width:620px;margin:0 auto;padding:0 14px 170px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);padding:12px 0 8px}
+.hr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+h1{font-size:20px;margin:0;letter-spacing:-.02em}
+.d{color:var(--mut);font-size:12.5px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0}
+.sr{display:flex;gap:8px}
+.q{flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card)}
+.fl{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 8px;font-weight:600;font-size:13px;max-width:118px}
+.fab{position:fixed;right:max(16px,calc(50% - 294px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:8;background:var(--ink);color:var(--bg);font-weight:400;font-size:32px;line-height:1;width:58px;height:58px;border-radius:50%;box-shadow:0 6px 20px rgba(15,23,42,.3)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav div{display:flex;max-width:620px;margin:0 auto}
+nav button{flex:1;background:none;color:var(--mut);padding:9px 4px 10px;font-weight:700;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button.on{color:var(--acc)}
+nav i{font-style:normal;font-size:19px;line-height:1.1}
+nav b{background:#e11d48;color:#fff;border-radius:99px;font-size:10.5px;padding:1px 6px;margin-left:4px}
+.toast{position:fixed;left:50%;bottom:calc(150px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:99px;font-weight:700;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;white-space:nowrap}
+.toast.on{opacity:1}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:10px}
+.r1{display:flex;gap:11px;align-items:flex-start}
+.av{width:42px;height:42px;border-radius:50%;background:var(--accb);color:var(--acc);display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.nm{font-weight:700;font-size:16px;line-height:1.2}
+.tg{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--accb);color:var(--acc);margin-top:4px}
+.tg.s{background:#fdf0d2;color:#92600a}
+.mb{color:var(--mut);font-size:13px;margin-top:3px}
+.req{margin:10px 0 2px;font-weight:600}
+.req small{display:block;color:var(--mut);font-weight:400;font-style:italic;margin-top:1px}
+.r3{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}
+.st{appearance:none;-webkit-appearance:none;border:0;border-radius:99px;padding:7px 28px 7px 12px;font-weight:700;font-size:13px;color:var(--c);background:color-mix(in srgb,var(--c) 15%,transparent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center}
+.st option{color:#0f172a;background:#fff}
+.fu{border:1.5px dashed var(--acc);background:none;color:var(--acc);padding:6px 12px;border-radius:99px;font-weight:700;font-size:13px}
+.fu.set{border-style:solid;background:var(--accb)}
+.fu.od{border-color:#e11d48;color:#e11d48;background:color-mix(in srgb,#e11d48 12%,transparent)}
+.fu.t{border-color:#d97706;color:#b45309;background:color-mix(in srgb,#d97706 14%,transparent)}
+.ic{margin-left:auto;display:flex;gap:6px;flex:none}
+.ic a{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--accb);color:var(--acc)}
+.ic a.wa{background:var(--wab);color:var(--wa)}
+.ic svg{width:19px;height:19px;fill:currentColor}
+.hd{flex:1;min-width:0;cursor:pointer}
+.nr{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.mb{display:flex;align-items:center;gap:6px}
+.mb .tg{margin:0}
+.mn{background:var(--card);border:1px solid var(--line);border-radius:10px;width:34px;height:30px;font-size:18px;font-weight:700;line-height:1;color:var(--mut)}
+.hr>div{display:flex;align-items:center;gap:10px}
+.sh .rb{display:block;text-align:center;margin:8px 0 0;padding:13px;border-radius:12px;background:var(--accb);color:var(--acc);font-size:15px;font-weight:700;cursor:pointer}
+.lgo{position:fixed;inset:0;z-index:40;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}
+.lgo.on{display:flex}
+.lc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 20px;max-width:380px;width:100%;text-align:center}
+.lc h2{margin:0 0 6px}
+.bkl{color:var(--mut);font-size:13px;margin:0 0 6px}
+.em{text-align:center;color:var(--mut);padding:44px 10px}
+.em b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.ov{position:fixed;inset:0;background:rgba(8,12,20,.5);z-index:20;display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.sh{background:var(--card);width:100%;max-width:620px;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow:auto;animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.sh{animation:none}}
+.sh h2{margin:0 0 12px;font-size:18px}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:10px 0 4px}
+.sh input,.sh select,.sh textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:var(--inp)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.save{width:100%;margin-top:16px;padding:14px;border-radius:13px;background:var(--acc);color:#fff;font-weight:700;font-size:16px}
+.del{width:100%;margin-top:8px;padding:11px;border-radius:12px;background:none;color:#e11d48;font-weight:700}
+.wn{background:#fdf0d2;color:#7a4f06;padding:10px 12px;border-radius:10px;font-size:13px;margin-top:10px;display:none}
+.wn button{background:none;color:#7a4f06;font-weight:700;text-decoration:underline;padding:0}
+.fo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fo button{padding:13px;border-radius:12px;background:var(--accb);color:var(--acc);font-weight:700}
+.fo button.x{background:var(--inp);color:var(--mut)}
+</style></head>
+<body><div class="w">
+<header><div class="hr"><h1>Broker Saathi</h1><div><span class="d" id="dt"></span><button class="mn" id="mn" aria-label="Menu">⋯</button></div></div>
+<div class="sr"><input class="q" id="q" type="search" placeholder="Search: naam, mobile, area"><select class="fl" id="fl"></select></div></header>
+<div id="ls"></div>
+</div>
+<button class="fab" id="addb" aria-label="Add Customer" title="Add Customer">＋</button>
+<nav><div><button id="t1" class="on"><i>👥</i>Customers</button><button id="t2"></button><button id="t3"><i>🏠</i>Properties</button></div></nav>
+<div class="toast" id="toast"></div>
+
+<div class="ov" id="ov1"><div class="sh">
+<h2 id="ft">Naya customer</h2>
+<label>Naam *</label><input id="fn" autocomplete="off">
+<label>Mobile *</label><input id="fm" type="tel" inputmode="numeric" placeholder="10 digit number">
+<div class="wn" id="wn"></div>
+<div class="g2"><div><label>Kaun hai</label><select id="fy"><option>Buyer</option><option>Seller</option><option>Tenant</option></select></div>
+<div><label>Property type</label><select id="fp"><option>Plot</option><option>House</option><option>Flat</option><option>Kothi</option><option>Commercial</option></select></div></div>
+<div class="g2"><div><label>Area / Colony</label><input id="fa" placeholder="jaise Jhotwara"></div>
+<div><label>Budget (lakh me)</label><input id="fb" type="number" inputmode="decimal" placeholder="80"></div></div>
+<label>Note</label><textarea id="fnote" rows="2" placeholder="Kya chahiye, kya baat hui"></textarea>
+<button class="save" id="sv">Save karo</button><button class="del" id="dl" style="display:none">Delete karo</button>
+</div></div>
+
+<div class="ov" id="ov2"><div class="sh">
+<h2>Follow-up kab?</h2>
+<div class="fo"><button data-n="0">Aaj</button><button data-n="1">Kal</button><button data-n="3">3 din baad</button><button data-n="7">1 hafta baad</button></div>
+<label>Ya date chuno</label><input id="fd" type="date">
+<button class="save" id="fs">Date set karo</button><button class="del" id="fx" style="color:var(--mut)">Follow-up hatao / ho gaya</button>
+</div></div>
+
+<div class="ov" id="ov3"><div class="sh">
+<h2>Backup</h2><p class="bkl" id="who"></p><p class="bkl" id="bkl"></p>
+<button class="save" id="bkd" style="margin-top:6px">Backup download karo</button>
+<label class="rb">Backup restore karo<input type="file" id="bkr" accept=".json,application/json" hidden></label>
+<p class="bkl" style="margin-top:12px">Restore me sirf naye numbers jodte hain, purana data kabhi delete nahi hota.</p>
+<button class="del" id="lo" style="display:none;color:var(--mut)">Logout</button>
+</div></div>
+
+<div class="lgo" id="lg"><div class="lc"><h2>Broker Saathi</h2><p class="bkl">Google account se login karo. Aapka data har phone par safe rahega aur sirf aapko dikhega.</p><button class="save" id="gb">Google se login karo</button><p class="bkl" id="lge" style="color:#e11d48"></p></div></div>
+
+<script>window.FB_CONFIG={apiKey:"AIzaSyBENqdRvCNlw_2XJbCKPXTtAScKR7L34b4",authDomain:"broker-saathi-8aaff.firebaseapp.com",projectId:"broker-saathi-8aaff",storageBucket:"broker-saathi-8aaff.firebasestorage.app",messagingSenderId:"800024465160",appId:"1:800024465160:web:976b6c2517d988d084a6bd"};</script>
+<script>
+const S=[["New","#64748b"],["Interested","#3b6cf0"],["Site Visit","#8b5cf6"],["Negotiation","#b45309"],["Hot","#e11d48"],["Closed","#16a34a"],["Cold","#94a3b8"]];
+const K="bs_v1",$=i=>document.getElementById(i);
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const add=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let D=null;try{D=JSON.parse(localStorage.getItem(K)||"null")}catch(x){}
+if(!D)D=[
+{id:1,n:"Parvat Singh",m:"9000000001",y:"Buyer",p:"House",a:"Niwaru Road",b:80,s:0,f:add(0),note:"95 gaj chahiye, loan nahi"},
+{id:2,n:"Leelu Singh",m:"9000000002",y:"Buyer",p:"Kothi",a:"Mansarovar",b:30,s:1,f:add(-2),note:""},
+{id:3,n:"Aman Khan",m:"9000000003",y:"Buyer",p:"House",a:"Jhotwara",b:100,s:2,f:add(1),note:"Shaniwar ko site dekhna hai"},
+{id:4,n:"Ramesh Sharma",m:"9000000004",y:"Seller",p:"Plot",a:"Govind Nagar",b:40,s:4,f:add(0),note:"50 gaj, patta ready"},
+{id:5,n:"Sunita Meena",m:"9000000005",y:"Buyer",p:"Flat",a:"Vaishali Nagar",b:55,s:3,f:"",note:"2BHK, 3rd floor tak"},
+{id:6,n:"Mahesh Jain",m:"9000000006",y:"Seller",p:"House",a:"Jagatpura",b:85,s:6,f:"",note:"25x32 ka makaan"}];
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(x){}window.onSave&&window.onSave()};
+let tab=0,q="",fs=-1,eid=null,fid=null,warned=false;
+const B=l=>!l?"":l>=100?"₹"+ +(l/100).toFixed(2)+" Cr":"₹"+l+" L";
+const today=()=>iso(new Date());
+const due=c=>c.f&&c.f<=today()&&S[c.s][0]!=="Closed";
+function fuLab(c){if(!c.f)return["+ Follow-up set karo",""];const t=today(),dt=new Date(c.f+"T00:00"),l=dt.toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+if(c.f<t)return["Overdue · "+l,"od"];if(c.f===t)return["Aaj follow-up","t"];if(c.f===add(1))return["Kal follow-up","set"];return["Follow-up · "+l,"set"]}
+const I_CALL='<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>';
+const I_WA='<svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41z"/></svg>';
+let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),1500)}
+function render(){
+ $("dt").textContent=new Date().toLocaleDateString("hi-IN",{weekday:"long",day:"numeric",month:"long"});
+ const nd=D.filter(due).length;
+ $("t2").innerHTML='<i>🔔</i><span>Follow-ups'+(nd?'<b>'+nd+'</b>':'')+'</span>';
+ [0,1,2].forEach(i=>$("t"+(i+1)).className=tab===i?"on":"");
+ $("fl").innerHTML='<option value="-1">Status: Sab</option>'+S.map((x,i)=>'<option value="'+i+'">'+x[0]+'</option>').join("");$("fl").value=fs;
+ if(tab===2){$("ls").innerHTML='<div class="em"><b>Properties jaldi aa raha hai</b>Yahan aapki saari properties, photo aur share templates milenge.</div>';return}
+ let L=D.filter(c=>(tab===0||due(c))&&(fs<0||c.s===fs));
+ if(q){const k=q.toLowerCase();L=L.filter(c=>(c.n+c.m+c.a+c.p+c.note).toLowerCase().includes(k))}
+ L.sort((a,b)=>tab===1?a.f.localeCompare(b.f):b.id-a.id);
+ $("ls").innerHTML=L.length?L.map(card).join(""):'<div class="em"><b>'+(tab===1?"Aaj koi follow-up baaki nahi":"Koi customer nahi mila")+'</b>'+(tab===1?"Badhiya, sab nipta diya.":"Neeche ＋ Add Customer dabake customer jodo.")+'</div>';
+}
+function card(c){const f=fuLab(c),ini=c.n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase(),wa="https://wa.me/91"+c.m+"?text="+encodeURIComponent("Namaste "+c.n+" ji, property ke baare me baat karni thi.");
+return '<div class="c" data-id="'+c.id+'"><div class="r1"><div class="av" data-a="op">'+e(ini)+'</div><div class="hd" data-a="op"><div class="nm">'+e(c.n)+'</div><div class="mb"><span class="tg'+(c.y==="Seller"?" s":"")+'">'+e(c.y)+'</span> '+e(c.m)+'</div></div>'
++'<div class="ic"><a href="tel:+91'+c.m+'" aria-label="Call">'+I_CALL+'</a><a class="wa" href="'+wa+'" target="_blank" rel="noopener" aria-label="WhatsApp">'+I_WA+'</a></div></div>'
++'<div class="req" data-a="op">'+e(c.p)+(c.a?" • "+e(c.a):"")+(c.b?" • "+B(c.b):"")+(c.note?'<small>“'+e(c.note)+'”</small>':"")+'</div>'
++'<div class="r3"><select class="st" data-a="st" style="--c:'+S[c.s][1]+'">'+S.map((x,i)=>'<option value="'+i+'"'+(i===c.s?" selected":"")+'>'+x[0]+'</option>').join("")+'</select>'
++'<button class="fu '+f[1]+'" data-a="fu">'+e(f[0])+'</button></div></div>'}
+$("ls").addEventListener("click",ev=>{const b=ev.target.closest("[data-a]");if(!b||b.tagName==="SELECT")return;const id=+b.closest(".c").dataset.id;
+ if(b.dataset.a==="fu"){fid=id;const c=D.find(x=>x.id===id);$("fd").value=c.f||"";$("ov2").classList.add("on")}
+ if(b.dataset.a==="op")openForm(id)});
+$("ls").addEventListener("change",ev=>{if(ev.target.dataset.a!=="st")return;const c=D.find(x=>x.id===+ev.target.closest(".c").dataset.id);c.s=+ev.target.value;save();render();toast("Status: "+S[c.s][0]+" ✓")});
+$("fl").onchange=ev=>{fs=+ev.target.value;render()};
+[0,1,2].forEach(i=>$("t"+(i+1)).onclick=()=>{tab=i;render()});
+$("q").oninput=ev=>{q=ev.target.value.trim();render()};
+function openForm(id){eid=id;warned=false;$("wn").style.display="none";const c=id?D.find(x=>x.id===id):{n:"",m:"",y:"Buyer",p:"Plot",a:"",b:"",note:""};
+ $("ft").textContent=id?"Customer ki details":"Naya customer";$("fn").value=c.n;$("fm").value=c.m;$("fy").value=c.y;$("fp").value=c.p;$("fa").value=c.a;$("fb").value=c.b;$("fnote").value=c.note;
+ $("dl").style.display=id?"block":"none";$("ov1").classList.add("on");if(!id)setTimeout(()=>$("fn").focus(),50)}
+$("addb").onclick=()=>openForm(null);
+document.querySelectorAll(".ov").forEach(o=>o.addEventListener("click",ev=>{if(ev.target===o)o.classList.remove("on")}));
+$("sv").onclick=()=>{const n=$("fn").value.trim(),m=$("fm").value.replace(/\D/g,"").slice(-10);
+ if(!n){$("fn").focus();return}
+ if(m.length!==10){$("wn").innerHTML="Mobile number 10 digit ka hona chahiye.";$("wn").style.display="block";$("fm").focus();return}
+ const du=D.find(x=>x.m===m&&x.id!==eid);
+ if(du&&!warned){warned=true;$("wn").innerHTML="Ye number pehle se hai: <b>"+e(du.n)+"</b>. <button id=\"ex\">Existing kholo</button> ya dobara Save dabao.";$("wn").style.display="block";$("ex").onclick=()=>openForm(du.id);return}
+ const v={n,m,y:$("fy").value,p:$("fp").value,a:$("fa").value.trim(),b:+$("fb").value||0,note:$("fnote").value.trim()};
+ if(eid)Object.assign(D.find(x=>x.id===eid),v);else D.push(Object.assign({id:Date.now(),s:0,f:""},v));toast("Saved ✓");
+ save();$("ov1").classList.remove("on");render()};
+$("dl").onclick=()=>{if($("dl").dataset.c!==String(eid)){$("dl").dataset.c=eid;$("dl").textContent="Pakka delete? Dobara dabao";return}
+ D=D.filter(x=>x.id!==eid);$("dl").dataset.c="";$("dl").textContent="Delete karo";save();$("ov1").classList.remove("on");render()};
+function setF(v){D.find(x=>x.id===fid).f=v;save();$("ov2").classList.remove("on");render();toast(v?"Follow-up set ✓":"Follow-up hata diya")}
+document.querySelectorAll(".fo [data-n]").forEach(b=>b.onclick=()=>setF(add(+b.dataset.n)));
+$("fs").onclick=()=>{if($("fd").value)setF($("fd").value)};
+$("fx").onclick=()=>setF("");
+const BK="bs_bk";
+$("mn").onclick=()=>{let t="";try{t=localStorage.getItem(BK)||""}catch(x){}$("bkl").textContent=t?"Last backup: "+t:"Abhi tak backup nahi liya";$("ov3").classList.add("on")};
+$("bkd").onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:"application/json"})),a=document.createElement("a");a.href=u;a.download="broker-saathi-backup-"+today()+".json";document.body.appendChild(a);a.click();a.remove();try{localStorage.setItem(BK,new Date().toLocaleDateString("en-IN"))}catch(x){}toast("Backup download hua ✓");$("ov3").classList.remove("on")};
+$("bkr").onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const A=JSON.parse(r.result);if(!Array.isArray(A))throw 0;let n=0;A.forEach(c=>{if(c&&c.n&&/^\d{10}$/.test(c.m)&&!D.some(x=>x.m===c.m)){D.push(Object.assign({},c,{id:Date.now()+n,s:S[c.s]?c.s:0,f:c.f||""}));n++}});save();render();toast(n+" customer jode gaye ✓")}catch(x){toast("File sahi nahi hai")}$("ov3").classList.remove("on");ev.target.value=""};r.readAsText(f)};
+render();
+</script>
+<script type="module">
+const cfg=window.FB_CONFIG;
+if(cfg&&cfg.apiKey&&!/^PASTE/.test(cfg.apiKey)){
+const V="10.14.1",G="https://www.gstatic.com/firebasejs/"+V+"/";
+const{initializeApp}=await import(G+"firebase-app.js");
+const{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}=await import(G+"firebase-auth.js");
+const{initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,onSnapshot,writeBatch}=await import(G+"firebase-firestore.js");
+const app=initializeApp(cfg),auth=getAuth(app),db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
+const demo=c=>/^900000000\d$/.test(c.m);
+let col=null,last={},un=null,tm=null,applying=false;
+$("gb").onclick=async()=>{$("lge").textContent="";try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){$("lge").textContent="Login nahi hua. Dobara try karo."}};
+$("lo").onclick=async()=>{await signOut(auth);D=[];try{localStorage.removeItem(K);localStorage.removeItem("bs_ow")}catch(x){}render();$("ov3").classList.remove("on")};
+window.onSave=()=>{if(!col||applying)return;clearTimeout(tm);tm=setTimeout(push,400)};
+async function push(){if(!col)return;const cur={};D.forEach(c=>cur[c.id]=JSON.stringify(c));const ops=[];
+ for(const id in cur)if(last[id]!==cur[id])ops.push(["s",id]);
+ for(const id in last)if(!(id in cur))ops.push(["d",id]);
+ last=cur;
+ for(let i=0;i<ops.length;i+=400){const b=writeBatch(db);ops.slice(i,i+400).forEach(([t,id])=>t==="s"?b.set(doc(col,id),JSON.parse(cur[id])):b.delete(doc(col,id)));b.commit().catch(()=>toast("Sync nahi hua, net check karo"))}}
+onAuthStateChanged(auth,u=>{
+ if(un){un();un=null}
+ if(!u){col=null;last={};$("lo").style.display="none";$("lg").classList.add("on");return}
+ $("lg").classList.remove("on");$("who").textContent=u.email;$("lo").style.display="block";
+ col=collection(db,"brokers",u.uid,"contacts");
+ const loc=D.filter(c=>!demo(c));let first=true;
+ un=onSnapshot(col,snap=>{const R=snap.docs.map(d=>d.data());let extra=[];
+  if(first){first=false;let ow=null;try{ow=localStorage.getItem("bs_ow");localStorage.setItem("bs_ow",u.uid)}catch(x){}
+   if(!ow)extra=loc.filter(c=>!R.some(r=>r.m===c.m))}
+  applying=true;D=R.concat(extra);R.forEach(c=>last[c.id]=JSON.stringify(c));save();applying=false;render();
+  if(extra.length)push()},()=>toast("Cloud se judne me dikkat"))});
+}
+</script>
+</body></html>
