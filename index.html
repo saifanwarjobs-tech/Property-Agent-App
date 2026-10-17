@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Broker Saathi</title>
+<style>
+:root{--bg:#f4f5f8;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e5e8ef;--acc:#3151e0;--accb:#e9edff;--wa:#15803d;--wab:#e2f5e9;--inp:#f4f5f8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a26;--ink:#eef2f8;--mut:#93a0b5;--line:#232c3d;--acc:#7b93ff;--accb:#1d2646;--wa:#4ade80;--wab:#12301f;--inp:#0f1520;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a26;--ink:#eef2f8;--mut:#93a0b5;--line:#232c3d;--acc:#7b93ff;--accb:#1d2646;--wa:#4ade80;--wab:#12301f;--inp:#0f1520;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.w{max-width:620px;margin:0 auto;padding:0 14px 90px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);padding:14px 0 8px}
+h1{font-size:22px;margin:0;letter-spacing:-.02em}
+.d{color:var(--mut);font-size:13px;margin:0 0 12px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0}
+.add{width:100%;background:var(--ink);color:var(--bg);font-weight:700;font-size:16px;padding:15px;border-radius:14px;display:flex;justify-content:center;gap:8px;align-items:center}
+.tabs{display:flex;gap:6px;margin:12px 0 10px;background:var(--card);padding:4px;border-radius:12px;border:1px solid var(--line)}
+.tabs button{flex:1;padding:9px 6px;border-radius:9px;background:none;color:var(--mut);font-weight:600;font-size:14px}
+.tabs button.on{background:var(--accb);color:var(--acc)}
+.q{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);margin-bottom:8px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.chips button{white-space:nowrap;padding:6px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:var(--mut);font-size:13px;font-weight:600}
+.chips button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:10px}
+.r1{display:flex;gap:11px;align-items:flex-start}
+.av{width:42px;height:42px;border-radius:50%;background:var(--accb);color:var(--acc);display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.nm{font-weight:700;font-size:16px;line-height:1.2}
+.tg{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--accb);color:var(--acc);margin-top:4px}
+.tg.s{background:#fdf0d2;color:#92600a}
+.mb{color:var(--mut);font-size:13px;margin-top:3px}
+.req{margin:10px 0 2px;font-weight:600}
+.req small{display:block;color:var(--mut);font-weight:400;font-style:italic;margin-top:1px}
+.r3{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}
+.st{appearance:none;-webkit-appearance:none;border:0;border-radius:99px;padding:7px 28px 7px 12px;font-weight:700;font-size:13px;color:var(--c);background:color-mix(in srgb,var(--c) 15%,transparent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2394a3b8' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 11px center}
+.st option{color:#0f172a;background:#fff}
+.fu{border:1.5px dashed var(--acc);background:none;color:var(--acc);padding:6px 12px;border-radius:99px;font-weight:700;font-size:13px}
+.fu.set{border-style:solid;background:var(--accb)}
+.fu.od{border-color:#e11d48;color:#e11d48;background:color-mix(in srgb,#e11d48 12%,transparent)}
+.fu.t{border-color:#d97706;color:#b45309;background:color-mix(in srgb,#d97706 14%,transparent)}
+.ac{margin-left:auto;display:flex;gap:6px}
+.ac a,.ac button{padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;background:var(--ink);color:var(--bg)}
+.ac a.wa{background:var(--wab);color:var(--wa)}
+.ac a.ca{background:var(--accb);color:var(--acc)}
+.em{text-align:center;color:var(--mut);padding:44px 10px}
+.em b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.ov{position:fixed;inset:0;background:rgba(8,12,20,.5);z-index:20;display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+.sh{background:var(--card);width:100%;max-width:620px;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow:auto;animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.sh{animation:none}}
+.sh h2{margin:0 0 12px;font-size:18px}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--mut);margin:10px 0 4px}
+.sh input,.sh select,.sh textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:var(--inp)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.save{width:100%;margin-top:16px;padding:14px;border-radius:13px;background:var(--acc);color:#fff;font-weight:700;font-size:16px}
+.del{width:100%;margin-top:8px;padding:11px;border-radius:12px;background:none;color:#e11d48;font-weight:700}
+.wn{background:#fdf0d2;color:#7a4f06;padding:10px 12px;border-radius:10px;font-size:13px;margin-top:10px;display:none}
+.wn button{background:none;color:#7a4f06;font-weight:700;text-decoration:underline;padding:0}
+.fo{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fo button{padding:13px;border-radius:12px;background:var(--accb);color:var(--acc);font-weight:700}
+.fo button.x{background:var(--inp);color:var(--mut)}
+</style></head>
+<body><div class="w">
+<header><h1>Broker Saathi</h1><p class="d" id="dt"></p>
+<button class="add" id="addb">＋ Add Customer</button></header>
+<div class="tabs"><button id="t1" class="on"></button><button id="t2"></button></div>
+<input class="q" id="q" type="search" placeholder="Naam, mobile ya area search karo">
+<div class="chips" id="ch"></div>
+<div id="ls"></div>
+</div>
+
+<div class="ov" id="ov1"><div class="sh">
+<h2 id="ft">Naya customer</h2>
+<label>Naam *</label><input id="fn" autocomplete="off">
+<label>Mobile *</label><input id="fm" type="tel" inputmode="numeric" placeholder="10 digit number">
+<div class="wn" id="wn"></div>
+<div class="g2"><div><label>Kaun hai</label><select id="fy"><option>Buyer</option><option>Seller</option><option>Tenant</option></select></div>
+<div><label>Property type</label><select id="fp"><option>Plot</option><option>House</option><option>Flat</option><option>Kothi</option><option>Commercial</option></select></div></div>
+<div class="g2"><div><label>Area / Colony</label><input id="fa" placeholder="jaise Jhotwara"></div>
+<div><label>Budget (lakh me)</label><input id="fb" type="number" inputmode="decimal" placeholder="80"></div></div>
+<label>Note</label><textarea id="fnote" rows="2" placeholder="Kya chahiye, kya baat hui"></textarea>
+<button class="save" id="sv">Save karo</button><button class="del" id="dl" style="display:none">Delete karo</button>
+</div></div>
+
+<div class="ov" id="ov2"><div class="sh">
+<h2>Follow-up kab?</h2>
+<div class="fo"><button data-n="0">Aaj</button><button data-n="1">Kal</button><button data-n="3">3 din baad</button><button data-n="7">1 hafta baad</button></div>
+<label>Ya date chuno</label><input id="fd" type="date">
+<button class="save" id="fs">Date set karo</button><button class="del" id="fx" style="color:var(--mut)">Follow-up hatao / ho gaya</button>
+</div></div>
+
+<script>
+const S=[["New","#64748b"],["Interested","#3b6cf0"],["Site Visit","#8b5cf6"],["Negotiation","#b45309"],["Hot","#e11d48"],["Closed","#16a34a"],["Cold","#94a3b8"]];
+const K="bs_v1",$=i=>document.getElementById(i);
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const add=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let D=null;try{D=JSON.parse(localStorage.getItem(K)||"null")}catch(x){}
+if(!D)D=[
+{id:1,n:"Parvat Singh",m:"9000000001",y:"Buyer",p:"House",a:"Niwaru Road",b:80,s:0,f:add(0),note:"95 gaj chahiye, loan nahi"},
+{id:2,n:"Leelu Singh",m:"9000000002",y:"Buyer",p:"Kothi",a:"Mansarovar",b:30,s:1,f:add(-2),note:""},
+{id:3,n:"Aman Khan",m:"9000000003",y:"Buyer",p:"House",a:"Jhotwara",b:100,s:2,f:add(1),note:"Shaniwar ko site dekhna hai"},
+{id:4,n:"Ramesh Sharma",m:"9000000004",y:"Seller",p:"Plot",a:"Govind Nagar",b:40,s:4,f:add(0),note:"50 gaj, patta ready"},
+{id:5,n:"Sunita Meena",m:"9000000005",y:"Buyer",p:"Flat",a:"Vaishali Nagar",b:55,s:3,f:"",note:"2BHK, 3rd floor tak"},
+{id:6,n:"Mahesh Jain",m:"9000000006",y:"Seller",p:"House",a:"Jagatpura",b:85,s:6,f:"",note:"25x32 ka makaan"}];
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(D))}catch(x){}};
+let tab=0,q="",fs=-1,eid=null,fid=null,warned=false;
+const B=l=>!l?"":l>=100?"₹"+ +(l/100).toFixed(2)+" Cr":"₹"+l+" L";
+const today=()=>iso(new Date());
+const due=c=>c.f&&c.f<=today()&&S[c.s][0]!=="Closed";
+function fuLab(c){if(!c.f)return["+ Follow-up set karo",""];const t=today(),dt=new Date(c.f+"T00:00"),l=dt.toLocaleDateString("en-IN",{day:"numeric",month:"short"});
+if(c.f<t)return["Overdue · "+l,"od"];if(c.f===t)return["Aaj follow-up","t"];if(c.f===add(1))return["Kal follow-up","set"];return["Follow-up · "+l,"set"]}
+function render(){
+ $("dt").textContent=new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"});
+ const nd=D.filter(due).length;
+ $("t1").textContent="Sab customers ("+D.length+")";$("t2").textContent="Aaj ke follow-ups"+(nd?" ("+nd+")":"");
+ $("t1").className=tab?"":"on";$("t2").className=tab?"on":"";
+ $("ch").innerHTML=[["Sab",-1]].concat(S.map((x,i)=>[x[0],i])).map(x=>'<button data-s="'+x[1]+'" class="'+(fs===x[1]?"on":"")+'">'+x[0]+'</button>').join("");
+ let L=D.filter(c=>(!tab||due(c))&&(fs<0||c.s===fs));
+ if(q){const k=q.toLowerCase();L=L.filter(c=>(c.n+c.m+c.a+c.p+c.note).toLowerCase().includes(k))}
+ L.sort((a,b)=>tab?a.f.localeCompare(b.f):b.id-a.id);
+ $("ls").innerHTML=L.length?L.map(card).join(""):'<div class="em"><b>'+(tab?"Aaj koi follow-up baaki nahi":"Koi customer nahi mila")+'</b>'+(tab?"Badhiya, sab nipta diya.":"Upar ＋ Add Customer dabake pehla customer jodo.")+'</div>';
+}
+function card(c){const f=fuLab(c),ini=c.n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join("").toUpperCase(),wa="https://wa.me/91"+c.m+"?text="+encodeURIComponent("Namaste "+c.n+" ji, property ke baare me baat karni thi.");
+return '<div class="c" data-id="'+c.id+'"><div class="r1"><div class="av">'+e(ini)+'</div><div><div class="nm">'+e(c.n)+'</div><span class="tg'+(c.y==="Seller"?" s":"")+'">'+e(c.y)+'</span><div class="mb">'+e(c.m)+'</div></div></div>'
++'<div class="req">'+e(c.p)+(c.a?" • "+e(c.a):"")+(c.b?" • "+B(c.b):"")+(c.note?'<small>“'+e(c.note)+'”</small>':"")+'</div>'
++'<div class="r3"><select class="st" data-a="st" style="--c:'+S[c.s][1]+'">'+S.map((x,i)=>'<option value="'+i+'"'+(i===c.s?" selected":"")+'>'+x[0]+'</option>').join("")+'</select>'
++'<button class="fu '+f[1]+'" data-a="fu">'+e(f[0])+'</button>'
++'<div class="ac"><a class="ca" href="tel:+91'+c.m+'">Call</a><a class="wa" href="'+wa+'" target="_blank" rel="noopener">WhatsApp</a><button data-a="op">Open</button></div></div></div>'}
+$("ls").addEventListener("click",ev=>{const b=ev.target.closest("[data-a]");if(!b||b.tagName==="SELECT")return;const id=+b.closest(".c").dataset.id;
+ if(b.dataset.a==="fu"){fid=id;const c=D.find(x=>x.id===id);$("fd").value=c.f||"";$("ov2").classList.add("on")}
+ if(b.dataset.a==="op")openForm(id)});
+$("ls").addEventListener("change",ev=>{if(ev.target.dataset.a!=="st")return;const c=D.find(x=>x.id===+ev.target.closest(".c").dataset.id);c.s=+ev.target.value;save();render()});
+$("ch").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;fs=+b.dataset.s;render()});
+$("t1").onclick=()=>{tab=0;render()};$("t2").onclick=()=>{tab=1;render()};
+$("q").oninput=ev=>{q=ev.target.value.trim();render()};
+function openForm(id){eid=id;warned=false;$("wn").style.display="none";const c=id?D.find(x=>x.id===id):{n:"",m:"",y:"Buyer",p:"Plot",a:"",b:"",note:""};
+ $("ft").textContent=id?"Customer ki details":"Naya customer";$("fn").value=c.n;$("fm").value=c.m;$("fy").value=c.y;$("fp").value=c.p;$("fa").value=c.a;$("fb").value=c.b;$("fnote").value=c.note;
+ $("dl").style.display=id?"block":"none";$("ov1").classList.add("on");if(!id)setTimeout(()=>$("fn").focus(),50)}
+$("addb").onclick=()=>openForm(null);
+document.querySelectorAll(".ov").forEach(o=>o.addEventListener("click",ev=>{if(ev.target===o)o.classList.remove("on")}));
+$("sv").onclick=()=>{const n=$("fn").value.trim(),m=$("fm").value.replace(/\D/g,"").slice(-10);
+ if(!n){$("fn").focus();return}
+ if(m.length!==10){$("wn").innerHTML="Mobile number 10 digit ka hona chahiye.";$("wn").style.display="block";$("fm").focus();return}
+ const du=D.find(x=>x.m===m&&x.id!==eid);
+ if(du&&!warned){warned=true;$("wn").innerHTML="Ye number pehle se hai: <b>"+e(du.n)+"</b>. <button id=\"ex\">Existing kholo</button> ya dobara Save dabao.";$("wn").style.display="block";$("ex").onclick=()=>openForm(du.id);return}
+ const v={n,m,y:$("fy").value,p:$("fp").value,a:$("fa").value.trim(),b:+$("fb").value||0,note:$("fnote").value.trim()};
+ if(eid)Object.assign(D.find(x=>x.id===eid),v);else D.push(Object.assign({id:Date.now(),s:0,f:""},v));
+ save();$("ov1").classList.remove("on");render()};
+$("dl").onclick=()=>{if($("dl").dataset.c!==String(eid)){$("dl").dataset.c=eid;$("dl").textContent="Pakka delete? Dobara dabao";return}
+ D=D.filter(x=>x.id!==eid);$("dl").dataset.c="";$("dl").textContent="Delete karo";save();$("ov1").classList.remove("on");render()};
+function setF(v){D.find(x=>x.id===fid).f=v;save();$("ov2").classList.remove("on");render()}
+document.querySelectorAll(".fo [data-n]").forEach(b=>b.onclick=()=>setF(add(+b.dataset.n)));
+$("fs").onclick=()=>{if($("fd").value)setF($("fd").value)};
+$("fx").onclick=()=>setF("");
+render();
+</script></body></html>
